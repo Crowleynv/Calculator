@@ -4,20 +4,20 @@ public class Calc {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите два числа: ");
-        String virajenie = scanner.nextLine();
-        System.out.println(parse(virajenie));
+        String expression = scanner.nextLine();
+        System.out.println(calc(expression));
 
     }
 
-    public static String parse(String virajenie) throws Exception {
+    public static String calc(String input) throws Exception {
         int num1;
         int num2;
         String oper;
         String result;
         boolean isRoman;
-        String[] operator = virajenie.split("[+\\-*/]");
+        String[] operator = input.split("[+\\-*/]");
         if (operator.length != 2) throw new Exception("Должно быть два числа");
-        oper = detectOperation(virajenie);
+        oper = detectOperation(input);
         if (oper == null) throw new Exception("Неподдерживаемая математическая операция");
         if (Roman.isRoman(operator[0]) && Roman.isRoman(operator[1])) {
             num1 = Roman.convertToArabian(operator[0]);
@@ -33,7 +33,7 @@ public class Calc {
         if (num1 > 10 || num1 < 0 || num2 > 10 || num2 < 0) {
             throw new Exception("Число должно быть положительным и меньше десяти");
         }
-        int arabian = calc(num1, num2, oper);
+        int arabian = calculator(num1, num2, oper);
         if (isRoman) {
             result = Roman.convertToRoman(arabian);
         } else {
@@ -51,7 +51,7 @@ public class Calc {
         else return null;
     }
 
-    static int calc(int a, int b, String oper) {
+    static int calculator(int a, int b, String oper) {
 
         if (oper.equals("+")) return a + b;
         else if (oper.equals("-")) return a - b;
